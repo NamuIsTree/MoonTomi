@@ -1,15 +1,32 @@
+// base
 import React from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';
 
+// material-ui
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import { makeStyles } from '@material-ui/core/styles';
+
+// slick-carousel
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.css"
 
-function ShowAlbum ({index, id, name, artist, rating}) {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        diplay: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+}));
+
+function ShowAlbum ({index, id, name, artist}) {
     const imgsrc = "url(http://moonmusic.duckdns.org/images/" + id + ".jpg)";
     var trophy;
-    var rankColor;
     if (index == 1) {
         trophy = "http://moonmusic.duckdns.org/images/gold.png";
     }
@@ -45,8 +62,10 @@ function ShowAlbum ({index, id, name, artist, rating}) {
 class Home extends React.Component {
     state = {
         isLoading: true,
-        albums : [],
-        rlbums : []
+        isHOF: true,
+        ROFs : [],
+        HOFs : [],
+        albums : []
     }
 
     getAlbums = async () => {
@@ -55,8 +74,13 @@ class Home extends React.Component {
         albums.data.sort(function(a, b) {
             return b.rating - a.rating;
         });
-        this.setState({albums: albums.data.slice(0, 10), 
-                       rlbums: albums.data.slice(-10).reverse(),
+
+        const HOF = albums.data.slice(0, 10);
+        const ROF = albums.data.slice(-10).reverse();
+
+        this.setState({albums: HOF,
+                       ROFs: ROF,
+                       HOFs: HOF,
                        isLoading: false});
     }
 
@@ -84,10 +108,8 @@ class Home extends React.Component {
                 }
             ]
         }
-        
-        const {isLoading, albums, rlbums} = this.state;
+        const {isLoading, isHOF, albums} = this.state;
         var order = 1;
-        var rrder = 1;
         return (
             <section className="home-container">
                 {isLoading ? (
@@ -98,8 +120,37 @@ class Home extends React.Component {
                 <div className="page_title">
                     <center>
                     <div className="HOF-title">
-                        <img src="http://moonmusic.duckdns.org/images/m_logo.png" alt="m_logo"/>
-                        명예의 전당
+                        <a href="http://moonmusic.duckdns.org">
+                            <img src="http://moonmusic.duckdns.org/images/m_logo.png" alt="m_logo"/>
+                        </a>
+                        <ButtonGroup 
+                        orientation="vertical"
+                        aria-label="outlined primary button group">
+                            <Button 
+                            color={isHOF ? "secondary" : "primary"}
+                            onClick={() => {
+                                this.setState({
+                                    albums: this.state.HOFs,
+                                    isHOF: true
+                                });
+                            }}>
+                                <div className="HOF">
+                                    명예의 전당
+                                </div>
+                            </Button>
+                            <Button 
+                            color={isHOF ? "primary" : "secondary"}
+                            onClick={() => {
+                                this.setState({
+                                    albums: this.state.ROFs,
+                                    isHOF: false
+                                });
+                            }}>
+                                <div className="ROF">
+                                    불명예의 전당
+                                </div>
+                            </Button>
+                        </ButtonGroup>
                     </div>
                     <div className="HOF-albums">
                         <Slider {...settings}>
@@ -110,26 +161,6 @@ class Home extends React.Component {
                                     id = {album.id}
                                     name = {album.name}
                                     artist = {album.artist}
-                                    rating = {album.rating}
-                                />
-                            ))}
-                        </Slider>
-                    </div>
-                    <br></br>
-                    <div className="ROF-title">
-                        <img src="http://moonmusic.duckdns.org/images/m_logo.png" alt="m_logo"/>
-                        불명예의 전당
-                    </div>
-                    <div className="rlbums">
-                    <Slider {...settings}>
-                            {rlbums.map(album => (
-                                <ShowAlbum 
-                                    key= {rrder}
-                                    index = {rrder++}
-                                    id = {album.id}
-                                    name = {album.name}
-                                    artist = {album.artist}
-                                    rating = {album.rating}
                                 />
                             ))}
                         </Slider>
