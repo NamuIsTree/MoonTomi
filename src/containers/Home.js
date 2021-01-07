@@ -7,36 +7,36 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Home.css"
 
 function ShowAlbum ({index, id, name, artist, rating}) {
-    const imgsrc = "http://moonmusic.duckdns.org/images/" + id + ".jpg";
+    const imgsrc = "url(http://moonmusic.duckdns.org/images/" + id + ".jpg)";
+    var trophy;
     var rankColor;
     if (index == 1) {
-        rankColor = '#ff0000';
+        trophy = "http://moonmusic.duckdns.org/images/gold.png";
     }
     else if (index == 2) {
-        rankColor = '#ff3333';
+        trophy = "http://moonmusic.duckdns.org/images/silver.png";
     }
     else if (index == 3) {
-        rankColor = '#ff6666';
+        trophy = "http://moonmusic.duckdns.org/images/bronze.png";
     }
     else {
-        rankColor = '#ff9999';
+        trophy = "http://moonmusic.duckdns.org/images/unrank.png";
     }
     
-    if (artist)
-
     return (
-        <div className="HOF-album">
-            <div className="HOF-album-ranking"
-                 style = {{
-                     color: rankColor
-                 }}> {index}위 : {rating}
-            </div>
-            <img src={imgsrc} alt={name}/>
-            <div className="HOF-album-name">
-                {name}
-            </div>
-            <div className="HOF-album-artist">
-                {artist}
+        <div className="HOF-album"
+             style = {{
+                 backgroundImage: imgsrc
+             }}
+        >
+            <div className="HOF-album-detail">
+                <img src={trophy} alt="trophy image"/>
+                <div className="HOF-album-name"> 
+                    {name}
+                </div>
+                <div className="HOF-album-artist">
+                    {artist}
+                </div>
             </div>
         </div>
     );
@@ -64,47 +64,22 @@ class Home extends React.Component {
         this.getAlbums();
     }
 
-    constructor(props) {
-        super(props);
-
-        const meta = document.createElement('meta');
-        meta.name = "viewport";
-        meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
-        document.getElementsByTagName('head')[0].appendChild(meta);
-    }
-
     render() {
         const settings = {
             className: "album-container",
-            centerMode: true,
             dots: true,
-            centerPadding: "60px",
-            dotsClass: "slick-dots slick-thumb",
             infinite: true,
-            focusOnSelect: true,
-            speed: 500,
-            slidesToShow: 4,
+            autoplay: true,
+            autoplaySpeed: 2500,
+            slidesToShow: 3,
             slidesToScroll: 1,
             responsive: [
-                {
-                    breakpoint: 2300,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 1800,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
                 {
                     breakpoint: 1200,
                     settings: {
                         slidesToShow: 1,
-                        slidesToScroll: 1
+                        slidesToScroll: 1,
+                        initialSlide: 0
                     }
                 }
             ]
@@ -114,7 +89,12 @@ class Home extends React.Component {
         var order = 1;
         var rrder = 1;
         return (
-            <section className="container">
+            <section className="home-container">
+                {isLoading ? (
+                    <div className = "loader">
+                        <span className = "loader-text">Loading Albums...</span>
+                    </div>
+                ) : (
                 <div className="page_title">
                     <center>
                     <div className="HOF-title">
@@ -156,6 +136,7 @@ class Home extends React.Component {
                     </div>
                     </center>
                 </div>
+                )}
             </section>
         );
     }

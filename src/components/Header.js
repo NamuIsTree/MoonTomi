@@ -13,10 +13,9 @@ const Header = () => {
         <div>
             <div className="logo">
                 <img src="http://moonmusic.duckdns.org/images/logo.jpg" alt="logo"/>
-                MoonTomi
             </div>
             <div className="menu">
-                <MenuItem to={'/'}>HOME</MenuItem>
+                <MenuItem to={'/'}>MoonTomi</MenuItem>
                 <MenuItem to={'/evaluate'}>음평회</MenuItem>
                 <MenuItem to={'/upload'}>평가 포스트</MenuItem>
             </div>
