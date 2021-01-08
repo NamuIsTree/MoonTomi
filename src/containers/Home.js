@@ -6,23 +6,11 @@ import Slider from 'react-slick';
 // material-ui
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { makeStyles } from '@material-ui/core/styles';
 
 // slick-carousel
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.css"
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        diplay: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        '& > *': {
-            margin: theme.spacing(1),
-        },
-    },
-}));
 
 function ShowAlbum ({index, id, name, artist}) {
     const imgsrc = "url(http://moonmusic.duckdns.org/images/" + id + ".jpg)";
