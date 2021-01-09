@@ -29,8 +29,8 @@ class AlbumUpload extends React.Component {
         this.setState(nextState);
     }
 
-    handleFormSubmit(e) {
-        e.preventDefault();
+    handleFormSubmit(event) {
+        event.preventDefault();
         this.addAlbum()
         .then((response) => {
             console.log(response);
@@ -65,7 +65,7 @@ class AlbumUpload extends React.Component {
                     <div className="album-upload-detail">
                         새 앨범을 업로드하는 곳입니다. <br/>
                         장르 [ 1:POP, 2:R&B/Soul, 3:Rock, 4:J-POP, 5:Jazz, 6:HipHop, 7:Electronic, 8:Others ] <br/>
-                        ex) Rock · POP = 31
+                        ex) Rock · POP = 31 <br/>
                     </div>
                     <form onSubmit = {this.handleFormSubmit}>
                         <TextField type="text" id="standard-basic" label="앨범 이름" name="name" onChange={this.handleValueChange}/> <br/> <br/>

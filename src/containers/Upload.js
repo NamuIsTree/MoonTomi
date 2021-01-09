@@ -19,13 +19,13 @@ function TabPanel(props) {
         <div
             role="tabpanel"
             hidden={value !== index}
-            id={`vertical-tabpanel-${index}`}
+            className={`vertical-tabpanel-${index}`}
             aria-labelledby={`vertical-tab-${index}`}
             {...other}
         >
             {value === index && (
                 <Box p={3}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </div>
@@ -70,7 +70,7 @@ export default function Upload() {
             <div className = {classes.root}>
                 <Tabs 
                     orientation="vertical"
-                    variant="scrollable"
+                    variant="fullWidth"
                     value={value}
                     onChange={handleChange}
                     aria-label="upload tabs"

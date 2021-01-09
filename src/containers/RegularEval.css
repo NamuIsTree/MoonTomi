@@ -1,0 +1,51 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+.regular-evaluation-title {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.album-information {
+    display: inline-block;
+    border-radius: 12px;
+    width: 100%;
+}
+
+.album-information
+.regular-evaluation-image img {
+    display: block;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 60%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.album-information
+.regular-evaluation-list {
+    float: right;
+}
+
+
+.regular-evaluation-title
+.MuiInputBase-input {
+    font-size: 3rem;
+    width: 5rem;
+    font-family: 'hanna', serif;
+    margin-top: -0.7rem;
+}
+
+.evaluation-album-title {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.evaluation-album-artist {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: gray;
+    text-align: center;
+}

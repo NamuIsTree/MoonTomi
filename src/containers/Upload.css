@@ -9,3 +9,9 @@
 .big-text {
     font-family: 'hanna', serif;
 }
+
+.vertical-tabpanel-0,
+.vertical-tabpanel-1,
+.vertical-tabpanel-2 {
+    width: 100%;
+}
