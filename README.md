@@ -3,4 +3,4 @@
 http://moontomi.duckdns.org~~
 
 ## 현재 이 데모 프로젝트는 중단되었습니다.
-이동 -> http://moontomi.ga
+이동 -> http://moontomi.duckdns.org
